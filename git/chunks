@@ -1,66 +1,44 @@
-git clone https://youngung@github.com/youngung/UPF.git
+Personal git tutorial
+=====================
 
-git branch -a
+ 1. Clone
+   * git clone https://youngung@github.com/youngung/UPF.git
 
+ 2. Showing all branch with under remote repository
+   * git branch -a
 
-2651 Saadia
+ 3. To fork a branch from a remote repo called 'origin'
+   * git checkout origin/experimental  #
+   * git checkout -b experimental origin/experimental -> to work on that branch
 
-git checkout origin/experimental
-git checkout -b experimental origin/experimental -> to work on that branch
-che
+ 4. Fixing working on a wrong branch
+   * git stash
+   * git checkout example_branch
+   * git stash apply
 
+ 5. Push to the remote 'origin'   
+   * git push origin
+   5-1. With tags.
+    * git push origin --tags
+   5-2. To push a new local branch
+    * git push origin 'new branch name'
 
--- Fixing working on a wrong branch
-git stash
-git checkout branch123
-git stash apply
+ 6. Undo a commit and redo.
+     $ git commit ...
+     $ git reset --soft HEAD^      (1)
+     $ edit                        (2)
+     $ git commit -a -c ORIG_HEAD  (3)
+       (1). This is most often done when you remembered what you just committed is incomplete, or you misspelled your commit message, or both. Leaves working tree as it was before "reset".
+       (2). Make corrections to working tree files.
+       (3). "reset" copies the old head to .git/ORIG_HEAD; redo the commit by starting with its log message. If you do not need to edit the message further, you can give -C option instead.
 
--- git push origin
+ 7. Fetch
+     * git fetch origin
+     * git checkout --track origin/plugin
 
--- git push origin --tags  #for pushing tag names.
-
-
-       Undo a commit and redo
-
-               $ git commit ...
-               $ git reset --soft HEAD^      (1)
-               $ edit                        (2)
-               $ git commit -a -c ORIG_HEAD  (3)
-
-           1. This is most often done when you remembered what you just committed is incomplete, or you misspelled
-           your commit message, or both. Leaves working tree as it was before "reset".
-           2. Make corrections to working tree files.
-           3. "reset" copies the old head to .git/ORIG_HEAD; redo the commit by starting with its log message. If you
-           do not need to edit the message further, you can give -C option instead.
-
-           See also the --amend option to git-commit(1).
-
-
-
-
-
-
-
-
-
-You might find yourself in a situation where you have a branch that you created locally and want to push to a remote git repository. Suppose you created a local plugin branch that you want to expose to others through your GitHub repository but you are not yet confident enough to put it into the master branch. Here is the command you would execute to push all of the changes from your plugin branch to a plugin branch on the GitHub repository:
-1
-git push origin plugin
-This tells git to push changes from your plugin branch to the plugin branch on the origin repository. If origin does not have a plugin branch, it is created on the fly. Now, say your friend Bob wants to access the hot new feature you just pushed to the new branch on the GitHub repository. All Bob needs to do is update his local repository with all of the changes on the GitHub repository and create a local branch where he can play with the new code.
-view sourceprint?
-1
-git fetch origin
-2
-git checkout --track origin/plugin
-
-
-
-! undo a merge
-
-With git log check which commit is one prior the merge. Then you can reset it using:
-
-git reset --hard commit_sha
-There's also another way
-
-git reset --hard HEAD~5
-will get you back 5 commits.
+ 8. Undo a merge
+    - With git log check which commit is one prior the merge. Then you can reset it using:
+      * git reset --hard commit_sha
+    - There's also another way
+      * git reset --hard HEAD~5
+    - will get you back 5 commits.
